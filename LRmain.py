@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report,confusion_matrix
+from sklearn.metrics import classification_report,confusion_matrix,accuracy_score
 from sklearn.preprocessing import StandardScaler
 
 def gradient(x,y,w,b):
@@ -30,7 +30,7 @@ def predict(x,w,b):
     preds=sigmoid(z)
     return preds
 
-data=pd.read_csv('MLKaggleBreastCancerWisconsinDiagnosisusingNN\data.csv')
+data=pd.read_csv('MLKaggleBreastCancerWisconsinDiagnosisusingNN(#)\data.csv')
 data=data.drop(['id','Unnamed: 32'],axis=1)
 data['diagnosis']=data['diagnosis'].map({'M':1,'B':0})
 x=data.drop(['diagnosis'],axis=1)
@@ -53,5 +53,7 @@ y_pred=(y_pred>=0.5).astype(int)
 print(y_pred)
 classi_report=classification_report(y_test,y_pred)
 confu_matrix=confusion_matrix(y_test,y_pred)
-print(classi_report)
-print(confu_matrix)
+acc_score=accuracy_score(y_test,y_pred)
+print('classification report \n',classi_report)
+print('confusion matrix \n',confu_matrix)
+print(f'accuracy : {acc_score}')
